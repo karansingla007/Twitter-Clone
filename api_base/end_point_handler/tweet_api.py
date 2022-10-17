@@ -32,6 +32,13 @@ class TweetApi(ApiBase):
         response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
         return response
 
+    def __likeTweet(self, parsed):
+        createLikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 0)'''
+        sqliteHelperObj.execute_insert_query(createLikeQuery)
+
+        response = {'response': 200, 'status': 'liked tweet'}
+        return response
+
     def handleGetTweetQuery(self, path, server):
         parsed = super().parse_query_params(path)
         response = {}
@@ -51,5 +58,14 @@ class TweetApi(ApiBase):
         elif '/tweet/delete' in path:
             response = self.__deleteTweet(parsed)
         elif '/tweet/edit' in path:
+            response = self.__editTweet(parsed)
+        elif 'tweet/like' in path:
+            response = self.__likeTweet(parsed)
+        # elif 'tweet/like' in path:
+        #     response = self.__likeTweet(parsed)
+
+
+
+
             response = self.__editTweet(parsed)
         super().return_success_response(response, server)
