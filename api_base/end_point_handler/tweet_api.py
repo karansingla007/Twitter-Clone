@@ -1,6 +1,6 @@
 from api_base.api_base import ApiBase
 from sqlite.sqlite_helper import SqliteHelper
-
+import json
 sqliteHelperObj = SqliteHelper.instance()
 
 
@@ -32,24 +32,34 @@ class TweetApi(ApiBase):
         response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
         return response
 
-    def __getLikedTweetsFromUser(self, parsed):
-        selectLikedTweetsQuery = f'''Select userLikes.user_id, userLikes.tweet_id, userLikes.status from user Inner Join userLikes on user.user_id = userLikes.user_id where user.user_name = {parsed['user_name'][0]}'''
-
+    def __getTweetsLikedUserList(self, parsed):
+        selectLikedTweetsQuery = f'''Select user.user_id, user.user_name, user.name, user.bio from user Inner Join userLikes on user.user_id = userLikes.user_id where userLikes.tweet_id = {parsed['tweet_id'][0]} And userLikes.status = 0'''
         response = sqliteHelperObj.execute_select_query(selectLikedTweetsQuery)
         return response
 
     def __likeTweet(self, parsed):
-        createLikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 0)'''
-        sqliteHelperObj.execute_insert_query(createLikeQuery)
-
-        response = {'response': 200, 'status': 'liked tweet'}
+        checkLikeQuery = f'''select status from userLikes where user_id = {parsed['user_id'][0]}  and tweet_id = {parsed['tweet_id'][0]}'''
+        checkLike = sqliteHelperObj.execute_select_query(checkLikeQuery)
+        json_object = json.loads(checkLike)
+        if len(json_object) > 0 and json_object[0]['status'] == 0:
+            response = {'response': 400, 'status': 'Already liked tweet'}
+        else:
+            createLikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 0)'''
+            sqliteHelperObj.execute_insert_query(createLikeQuery)
+            response = {'response': 200, 'status': 'Liked tweet'}
         return response
 
-    def __unlikeTweet(self, parsed):
-        createLikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 1)'''
-        sqliteHelperObj.execute_insert_query(createLikeQuery)
+    def __dislikeTweet(self, parsed):
 
-        response = {'response': 200, 'status': 'unliked tweet'}
+        checkDislikeQuery = f'''select status from userLikes where user_id = {parsed['user_id'][0]} and tweet_id = {parsed['tweet_id'][0]}'''
+        checkDislike = sqliteHelperObj.execute_select_query(checkDislikeQuery)
+        json_object = json.loads(checkDislike)
+        if len(json_object) > 0 and json_object[0]['status'] == 1:
+            response = {'response': 400, 'status': 'Already disliked tweet'}
+        else:
+            createDislikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 1)'''
+            sqliteHelperObj.execute_insert_query(createDislikeQuery)
+            response = {'response': 200, 'status': 'Disliked tweet'}
         return response
 
 
@@ -60,7 +70,7 @@ class TweetApi(ApiBase):
         if '/tweet/list/by/userName' in path:
             response = self.__getTweetsFromUser(parsed)
         elif 'tweet/like/list' in path:
-            response = self.__getLikedTweetsFromUser(parsed)
+            response = self.__getTweetsLikedUserList(parsed)
 
         if server is None:
             return response
@@ -79,7 +89,7 @@ class TweetApi(ApiBase):
         elif 'tweet/like' in path:
             response = self.__likeTweet(parsed)
         elif '/tweet/unlike/' in path:
-            response = self.__unlikeTweet(parsed)
+            response = self.__dislikeTweet(parsed)
 
 
         super().return_success_response(response, server)

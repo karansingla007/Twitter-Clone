@@ -34,6 +34,7 @@ class SqliteHelper:
 
     @staticmethod
     def execute_select_query(query):
+        print(dbImpObj.executeSelectQuery(query))
         return dbImpObj.executeSelectQuery(query)
 
     @staticmethod
