@@ -23,13 +23,19 @@ class TweetApi(ApiBase):
         createTweetQuery = f'''Update userTweets set title = {parsed['title'][0]}, description = {parsed['description'][0]} where user_id = {parsed['user_id'][0]} And tweet_id = {parsed['tweet_id'][0]}'''
         sqliteHelperObj.execute_query(createTweetQuery)
 
-        response = {'response': 200, 'status': 'deleted'}
+        response = {'response': 200, 'status': 'edited'}
         return response
 
     def __getTweetsFromUser(self, parsed):
         selectUserTweetsQuery = f'''Select userTweets.tweet_id, userTweets.title, userTweets.description from user Inner Join userTweets on user.user_id = userTweets.user_id where user.user_name = {parsed['user_name'][0]}'''
 
         response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
+        return response
+
+    def __getLikedTweetsFromUser(self, parsed):
+        selectLikedTweetsQuery = f'''Select userLikes.user_id, userLikes.tweet_id, userLikes.status from user Inner Join userLikes on user.user_id = userLikes.user_id where user.user_name = {parsed['user_name'][0]}'''
+
+        response = sqliteHelperObj.execute_select_query(selectLikedTweetsQuery)
         return response
 
     def __likeTweet(self, parsed):
@@ -39,12 +45,23 @@ class TweetApi(ApiBase):
         response = {'response': 200, 'status': 'liked tweet'}
         return response
 
+    def __unlikeTweet(self, parsed):
+        createLikeQuery = f'''Insert into userLikes(user_id, tweet_id, status) values ({parsed['user_id'][0]}, {parsed['tweet_id'][0]}, 1)'''
+        sqliteHelperObj.execute_insert_query(createLikeQuery)
+
+        response = {'response': 200, 'status': 'unliked tweet'}
+        return response
+
+
     def handleGetTweetQuery(self, path, server):
         parsed = super().parse_query_params(path)
         response = {}
 
         if '/tweet/list/by/userName' in path:
             response = self.__getTweetsFromUser(parsed)
+        elif 'tweet/like/list' in path:
+            response = self.__getLikedTweetsFromUser(parsed)
+
         if server is None:
             return response
         else:
@@ -61,11 +78,8 @@ class TweetApi(ApiBase):
             response = self.__editTweet(parsed)
         elif 'tweet/like' in path:
             response = self.__likeTweet(parsed)
-        # elif 'tweet/like' in path:
-        #     response = self.__likeTweet(parsed)
+        elif '/tweet/unlike/' in path:
+            response = self.__unlikeTweet(parsed)
 
 
-
-
-            response = self.__editTweet(parsed)
         super().return_success_response(response, server)
