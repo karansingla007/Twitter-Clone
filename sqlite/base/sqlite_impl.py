@@ -32,8 +32,6 @@ class SqliteImpl(SqliteAbc):
         print(type(response))
         response = str(response).replace("'", '"')
         return response
-        # data = self.cursor.fetchall()
-        # return data
 
     def executeQuery(self, query):
         self.cursor.execute(query)

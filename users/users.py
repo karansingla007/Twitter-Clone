@@ -5,16 +5,18 @@ from sqlite.sqlite_helper import SqliteHelper
 
 sqliteHelperObj = SqliteHelper()
 
+# get all users list
 def getAllUsersDetails(self):
-    sqliteHelperObj.useDatabaseQuery()
+    sqliteHelperObj.use_database_query()
     selectUserDetailQuery = '''Select user_id, name, user_name, bio from user'''
-    response = sqliteHelperObj.executeSelectQuery(selectUserDetailQuery)
+    response = sqliteHelperObj.use_database_query(selectUserDetailQuery)
 
     self.send_response(200, response)
     self.send_header("Content-type", "text/html")
     self.end_headers()
     self.wfile.write(bytes(str(response), "utf-8"))
 
+# get user followers
 def getUserFollower(self):
     print("########")
     parsed = parse_qs(urlparse(self.path).query)
@@ -29,10 +31,11 @@ def getUserFollower(self):
     self.end_headers()
     # self.wfile.write(bytes(str(response), "utf-8"))
 
+# get user following
 def getUserFollowing(self):
-    sqliteHelperObj.useDatabaseQuery()
+    sqliteHelperObj.use_database_query()
     selectUserDetailQuery = '''Select * from userFollowing'''
-    response = sqliteHelperObj.executeSelectQuery(selectUserDetailQuery)
+    response = sqliteHelperObj.execute_select_query(selectUserDetailQuery)
 
     self.send_response(200, response)
     self.send_header("Content-type", "text/html")
@@ -40,6 +43,7 @@ def getUserFollowing(self):
     self.wfile.write(bytes(str(response), "utf-8"))
 
 
+# Perform get operations on user
 def handleUserQuery(self):
     if self.path == '/user/all/details':
         getAllUsersDetails(self)

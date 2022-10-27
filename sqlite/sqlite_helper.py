@@ -2,24 +2,30 @@ from sqlite.base.sqlite_impl import SqliteImpl
 
 sqlImpObj = SqliteImpl()
 
+
 class SqliteHelper:
-    def createTable(self, query):
+    @staticmethod
+    def create_table(self, query):
         sqlImpObj.executeCreateTableQuery(query)
 
-
-    def createDatabase(self):
+    @staticmethod
+    def create_database(self):
         sqlImpObj.executeCreateDatabaseQuery()
 
-    def useDatabaseQuery(self):
+    @staticmethod
+    def use_database_query(self):
         sqlImpObj.executeUseDatabaseQuery()
 
-    def executeInsertQuery(self, query):
+    @staticmethod
+    def execute_insert_query(self, query):
         return sqlImpObj.executeInsertQuery(query)
 
-    def executeSelectQuery(self, query):
+    @staticmethod
+    def execute_select_query(self, query):
         return sqlImpObj.executeSelectQuery(query)
 
-    def executeQuery(self, query):
+    @staticmethod
+    def execute_query(self, query):
         try:
             sqlImpObj.executeQuery(query)
         except:

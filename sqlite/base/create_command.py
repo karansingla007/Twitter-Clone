@@ -1,7 +1,8 @@
 from sqlite.sqlite_helper import SqliteHelper
 
-
 sqliteHelperObj = SqliteHelper()
+
+
 def createTables():
     # create user table
     createUserTableQuery = '''Create Table user(
@@ -12,7 +13,7 @@ def createTables():
         created_at datetime default current_timestamp
         )'''
     print(createUserTableQuery)
-    sqliteHelperObj.createTable(createUserTableQuery)
+    sqliteHelperObj.create_table(createUserTableQuery)
 
     # create userFollower table
     createUserFollowTableQuery = '''Create Table userFollower(
@@ -22,7 +23,7 @@ def createTables():
                 FOREIGN KEY (follower_id) REFERENCES user(user_id)
                 )'''
     print(createUserFollowTableQuery)
-    sqliteHelperObj.createTable(createUserFollowTableQuery)
+    sqliteHelperObj.create_table(createUserFollowTableQuery)
 
     # create userFollowing table
     createUserFollowingTableQuery = '''Create Table userFollowing(
@@ -32,7 +33,7 @@ def createTables():
                 FOREIGN KEY (user_id) REFERENCES user(user_id)
                 )'''
     print(createUserFollowingTableQuery)
-    sqliteHelperObj.createTable(createUserFollowingTableQuery)
+    sqliteHelperObj.create_table(createUserFollowingTableQuery)
 
     # create userTweets table
     createUserTweetsTableQuery = '''Create Table userTweets(
@@ -44,7 +45,7 @@ def createTables():
                 FOREIGN KEY (user_id) REFERENCES user(user_id)
                 )'''
     print(createUserTweetsTableQuery)
-    sqliteHelperObj.createTable(createUserTweetsTableQuery)
+    sqliteHelperObj.create_table(createUserTweetsTableQuery)
 
     # create userLikes table
     createUserLikesTableQuery = '''Create Table userLikes(
@@ -56,11 +57,13 @@ def createTables():
                 FOREIGN KEY (tweet_id) REFERENCES userTweets(tweet_id)
                 )'''
     print(createUserLikesTableQuery)
-    sqliteHelperObj.createTable(createUserLikesTableQuery)
+    sqliteHelperObj.create_table(createUserLikesTableQuery)
+
 
 def createDataBase():
-    sqliteHelperObj.createDatabase()
-    sqliteHelperObj.useDatabaseQuery()
+    sqliteHelperObj.create_database()
+    sqliteHelperObj.use_database_query()
+
 
 if __name__ == "__main__":
     createDataBase()
