@@ -12,11 +12,11 @@ PORT = 8000
 
 
 # def getAndStoreUserDetail():
-#     json_response = fetchTwitterUserDetailByUserName("usernames=karansinglaOO7,saurabhs679,karafrenor,kartikryder,thegambhirjr7,sdrth,karannagpal96,anshulgoel02,CAPalakSingla2,theguywithideas")
-#     # print(json_response)
-#     for x in json_response['data']:
-#         insertUserDetailQuery = '''Insert into user(user_id, name, user_name, bio) values (%s, %s, %s, %s)'''%("'"+x['id']+"'","'"+x['name']+"'", "'"+x['username']+"'", "'"+x['description']+"'")
-#         sqliteHelperObj.executeInsertQuery(insertUserDetailQuery)
+    # json_response = fetchTwitterUserDetailByUserName("usernames=karansinglaOO7,saurabhs679,karafrenor,kartikryder,thegambhirjr7,sdrth,karannagpal96,anshulgoel02,CAPalakSingla2,theguywithideas")
+    # print(json_response)
+    # for x in json_response['data']:
+    #     insertUserDetailQuery = '''Insert into user(user_id, name, user_name, bio) values (%s, %s, %s, %s)'''%("'"+x['id']+"'","'"+x['name']+"'", "'"+x['username']+"'", "'"+x['description']+"'")
+    #     sqliteHelperObj.executeInsertQuery(insertUserDetailQuery)
 
 
 class MyHTTP(BaseHTTPRequestHandler):

@@ -2,9 +2,9 @@ from abc import abstractmethod
 
 
 class SqliteAbc:
-    # @abstractmethod
-    # def executeCreateTableQuery(self, query):
-    #     pass
+    @abstractmethod
+    def executeCreateTableQuery(self, query):
+        pass
 
     @abstractmethod
     def executeCreateDatabaseQuery(self):
