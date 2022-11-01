@@ -1,5 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from users.users import handleUserQuery
+
+from end_point_handler.tweet import handleGetTweetQuery, handlePostTweetQuery
+from end_point_handler.users import handlePostUserQuery, handleGetUserQuery
 
 from sqlite.sqlite_helper import SqliteHelper
 
@@ -21,14 +23,16 @@ PORT = 8000
 
 class MyHTTP(BaseHTTPRequestHandler):
     def do_GET(self):
-        if '/user' in self.path:
-            handleUserQuery(self)
-        # elif '/user' in self.path:
-        #     handleUserQuery(self)
+        if '/user/' in self.path:
+            handleGetUserQuery(self)
+        elif '/tweet' in self.path:
+            handleGetTweetQuery(self)
 
     def do_POST(self):
-        if '/user' in self.path:
-            handleUserQuery(self)
+        if '/user/' in self.path:
+            handlePostUserQuery(self)
+        elif '/tweet' in self.path:
+            handlePostTweetQuery(self)
 
 
 server = HTTPServer((HOST, PORT), MyHTTP)
