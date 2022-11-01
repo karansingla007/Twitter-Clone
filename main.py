@@ -1,5 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+from end_point_handler.feed import handleGetFeedQuery
 from end_point_handler.tweet import handleGetTweetQuery, handlePostTweetQuery
 from end_point_handler.users import handlePostUserQuery, handleGetUserQuery
 
@@ -27,6 +28,8 @@ class MyHTTP(BaseHTTPRequestHandler):
             handleGetUserQuery(self)
         elif '/tweet' in self.path:
             handleGetTweetQuery(self)
+        elif '/feed' in self.path:
+            handleGetFeedQuery(self)
 
     def do_POST(self):
         if '/user/' in self.path:
