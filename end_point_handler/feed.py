@@ -4,7 +4,7 @@ from end_point_handler.response import returnSuccessResponse
 from urllib.parse import urlparse, parse_qs
 from sqlite.sqlite_helper import SqliteHelper
 
-sqliteHelperObj = SqliteHelper()
+sqliteHelperObj = SqliteHelper.instance()
 
 
 def getUserFeed(self):

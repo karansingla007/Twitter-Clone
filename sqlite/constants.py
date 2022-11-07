@@ -1,3 +1,3 @@
-HOST = 'database-1.ca61zonggiii.ap-south-1.rds.amazonaws.com'
+HOST = 'database-1.csrlzcq1wcsa.ca-central-1.rds.amazonaws.com'
 USER = 'admin'
-PASSWORD = 'Rinki123*'
+PASSWORD = 'projectapp*'

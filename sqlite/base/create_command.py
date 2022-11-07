@@ -1,6 +1,6 @@
 from sqlite.sqlite_helper import SqliteHelper
 
-sqliteHelperObj = SqliteHelper()
+sqliteHelperObj = SqliteHelper.instance()
 
 
 def createTables():
