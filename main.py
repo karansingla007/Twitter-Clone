@@ -1,8 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-from end_point_handler.feed import handleGetFeedQuery
-from end_point_handler.tweet import handleGetTweetQuery, handlePostTweetQuery
-from end_point_handler.users import handlePostUserQuery, handleGetUserQuery
+from api_base.end_point_handler.feed_api import FeedApi
+from api_base.end_point_handler.users_api import UsersApi
+from api_base.end_point_handler.tweet_api import TweetApi
 
 # HOST = "ec2-15-207-87-184.ap-south-1.compute.amazonaws.com"
 # PORT = 8080
@@ -12,19 +12,23 @@ PORT = 8000
 
 
 class MyHTTP(BaseHTTPRequestHandler):
+    feedApi = FeedApi()
+    usersApi = UsersApi()
+    tweetApi = TweetApi()
+
     def do_GET(self):
         if '/user/' in self.path:
-            handleGetUserQuery(self)
+            self.usersApi.handleGetUserQuery(self.path, self)
         elif '/tweet' in self.path:
-            handleGetTweetQuery(self)
+            self.tweetApi.handleGetTweetQuery(self.path, self)
         elif '/feed' in self.path:
-            handleGetFeedQuery(self)
+            self.feedApi.handleGetFeedQuery(self.path, self)
 
     def do_POST(self):
         if '/user/' in self.path:
-            handlePostUserQuery(self)
+            self.usersApi.handlePostUserQuery(self.path, self)
         elif '/tweet' in self.path:
-            handlePostTweetQuery(self)
+            self.tweetApi.handlePostTweetQuery(self.path, self)
 
 
 server = HTTPServer((HOST, PORT), MyHTTP)
