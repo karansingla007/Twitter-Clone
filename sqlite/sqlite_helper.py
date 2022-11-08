@@ -1,6 +1,6 @@
-from sqlite.base.sqlite_impl import SqliteImpl
+from sqlite.base.db_impl import DbImpl
 
-sqlImpObj = SqliteImpl()
+dbImpObj = DbImpl()
 
 
 class SqliteHelper:
@@ -12,34 +12,30 @@ class SqliteHelper:
     @classmethod
     def instance(cls):
         if cls._instance is None:
-            print('Creating new instance')
             cls._instance = cls.__new__(cls)
             # Put any initialization here.
         return cls._instance
 
     @staticmethod
     def create_table(query):
-        sqlImpObj.executeCreateTableQuery(query)
+        dbImpObj.executeCreateTableQuery(query)
 
     @staticmethod
     def create_database():
-        sqlImpObj.executeCreateDatabaseQuery()
+        dbImpObj.executeCreateDatabaseQuery()
 
     @staticmethod
     def use_database_query():
-        sqlImpObj.executeUseDatabaseQuery()
+        dbImpObj.executeUseDatabaseQuery()
 
     @staticmethod
     def execute_insert_query(query):
-        return sqlImpObj.executeInsertQuery(query)
+        return dbImpObj.executeInsertQuery(query)
 
     @staticmethod
     def execute_select_query(query):
-        return sqlImpObj.executeSelectQuery(query)
+        return dbImpObj.executeSelectQuery(query)
 
     @staticmethod
     def execute_query(query):
-        try:
-            sqlImpObj.executeQuery(query)
-        except:
-            print('error simple execute Query')
+        return dbImpObj.executeQuery(query)
