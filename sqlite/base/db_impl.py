@@ -1,11 +1,12 @@
+# Creator: Karan Singla
+# Date: 12 Oct 2022
+
 import pymysql
-from sqlite.base.sqlite_abc import SqliteAbc
-from sqlite.constants import HOST
-from sqlite.constants import USER
-from sqlite.constants import PASSWORD
+from sqlite.base.db_base import DBBase
+from sqlite.constants import HOST, USER, PASSWORD
 
 
-class SqliteImpl(SqliteAbc):
+class DbImpl(DBBase):
 
     def __init__(self):
         db = pymysql.connect(host=HOST,

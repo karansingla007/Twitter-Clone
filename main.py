@@ -26,9 +26,9 @@ class MyHTTP(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if '/user/' in self.path:
-            self.usersApi.handlePostUserQuery(self.path, self)
+            self.usersApi.handlePostUserQuery(path=self.path, server=self)
         elif '/tweet' in self.path:
-            self.tweetApi.handlePostTweetQuery(self.path, self)
+            self.tweetApi.handlePostTweetQuery(path=self.path, server=self)
 
 
 server = HTTPServer((HOST, PORT), MyHTTP)
