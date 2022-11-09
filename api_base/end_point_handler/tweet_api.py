@@ -32,15 +32,16 @@ class TweetApi(ApiBase):
         response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
         return response
 
-
     def handleGetTweetQuery(self, path, server):
         parsed = super().parse_query_params(path)
         response = {}
 
         if '/tweet/list/by/userName' in path:
             response = self.__getTweetsFromUser(parsed)
-        super().return_success_response(response, server)
-
+        if server is None:
+            return response
+        else:
+            super().return_success_response(response, server)
 
     def handlePostTweetQuery(self, path, server):
         parsed = super().parse_query_params(path)
