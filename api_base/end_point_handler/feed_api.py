@@ -1,3 +1,6 @@
+# Creator: Karan Singla
+# Date: 15 Oct 2022
+
 import json
 
 from api_base.api_base import ApiBase
@@ -7,6 +10,7 @@ sqliteHelperObj = SqliteHelper.instance()
 
 
 class FeedApi(ApiBase):
+    # Get user feed :- user following feed by user_name
     def __getUserFeed(self, parsed):
         selectUserIdQuery = f'''Select user_id from user where user_name = {parsed['user_name'][0]}'''
         response = sqliteHelperObj.execute_select_query(selectUserIdQuery)
@@ -18,7 +22,7 @@ class FeedApi(ApiBase):
         response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
         return response
 
-
+    # Handle rotes of feed get api
     def handleGetFeedQuery(self, path, server):
         parsed = super().parse_query_params(path)
         response = {}
