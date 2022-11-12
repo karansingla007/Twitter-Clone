@@ -6,20 +6,20 @@ import json
 from api_base.api_base import ApiBase
 from sqlite.sqlite_helper import SqliteHelper
 
-sqliteHelperObj = SqliteHelper.instance()
-
 
 class FeedApi(ApiBase):
+    __sqliteHelperObj = SqliteHelper.instance()
+
     # Get user feed :- user following feed by user_name
     def __getUserFeed(self, parsed):
         selectUserIdQuery = f'''Select user_id from user where user_name = {parsed['user_name'][0]}'''
-        response = sqliteHelperObj.execute_select_query(selectUserIdQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserIdQuery)
         y = json.loads(response)
         user_id = y[0]['user_id']
         selectUserTweetsQuery = f'''Select userTweets.tweet_id, userTweets.title, userTweets.description from 
         userFollowing Inner Join userTweets on userFollowing.following_id = userTweets.user_id where 
         userFollowing.user_id = {user_id} '''
-        response = sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserTweetsQuery)
         return response
 
     # Handle rotes of feed get api

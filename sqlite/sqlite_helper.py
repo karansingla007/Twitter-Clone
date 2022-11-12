@@ -3,10 +3,9 @@
 
 from sqlite.base.db_impl import DbImpl
 
-dbImpObj = DbImpl()
-
 
 class SqliteHelper:
+    __dbImpObj = DbImpl()
     _instance = None
 
     def __init__(self):
@@ -19,27 +18,20 @@ class SqliteHelper:
             # Put any initialization here.
         return cls._instance
 
-    @staticmethod
-    def create_table(query):
-        dbImpObj.executeCreateTableQuery(query)
+    def create_table(self, query):
+        self.__dbImpObj.executeCreateTableQuery(query)
 
-    @staticmethod
-    def create_database():
-        dbImpObj.executeCreateDatabaseQuery()
+    def create_database(self):
+        self.__dbImpObj.executeCreateDatabaseQuery()
 
-    @staticmethod
-    def use_database_query():
-        dbImpObj.executeUseDatabaseQuery()
+    def use_database_query(self):
+        self.__dbImpObj.executeUseDatabaseQuery()
 
-    @staticmethod
-    def execute_insert_query(query):
-        return dbImpObj.executeInsertQuery(query)
+    def execute_insert_query(self, query):
+        return self.__dbImpObj.executeInsertQuery(query)
 
-    @staticmethod
-    def execute_select_query(query):
-        print(dbImpObj.executeSelectQuery(query))
-        return dbImpObj.executeSelectQuery(query)
+    def execute_select_query(self, query):
+        return self.__dbImpObj.executeSelectQuery(query)
 
-    @staticmethod
-    def execute_query(query):
-        return dbImpObj.executeQuery(query)
+    def execute_query(self, query):
+        return self.__dbImpObj.executeQuery(query)

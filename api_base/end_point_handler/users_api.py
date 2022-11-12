@@ -5,21 +5,21 @@ from api_base.api_base import ApiBase
 from sqlite.sqlite_helper import SqliteHelper
 from twitter_api.api_client import fetchTwitterUserDetailByUserName
 
-sqliteHelperObj = SqliteHelper.instance()
-
 
 class UsersApi(ApiBase):
+    __sqliteHelperObj = SqliteHelper.instance()
+
     # get all users list
     def __getAllUsersDetails(self):
         selectUserDetailQuery = '''Select user_id, name, user_name, bio from user'''
-        response = sqliteHelperObj.execute_select_query(selectUserDetailQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserDetailQuery)
 
         return response
 
     # get particular userId
     def __getUsersDetails(self, parsed):
         selectUserDetailQuery = f'''Select user_id, name, user_name, bio from user where user_id = {parsed['user_id'][0]}'''
-        response = sqliteHelperObj.execute_select_query(selectUserDetailQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserDetailQuery)
 
         return response
 
@@ -27,7 +27,7 @@ class UsersApi(ApiBase):
     def __getUserFollowerList(self, parsed):
         selectUserDetailQuery = f'''Select user.name, user.user_name, user.bio from user Inner Join userFollower on 
         user.user_id = userFollower.follower_id where userFollower.user_id = {parsed['user_id'][0]} '''
-        response = sqliteHelperObj.execute_select_query(selectUserDetailQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserDetailQuery)
 
         return response
 
@@ -35,7 +35,7 @@ class UsersApi(ApiBase):
     def __getUserFollowingList(self, parsed):
         selectUserDetailQuery = f'''Select user.name, user.user_name, user.bio from user Inner Join userFollowing on 
         user.user_id = userFollowing.following_id where userFollowing.user_id = {parsed['user_id'][0]} '''
-        response = sqliteHelperObj.execute_select_query(selectUserDetailQuery)
+        response = self.__sqliteHelperObj.execute_select_query(selectUserDetailQuery)
 
         return response
 
@@ -49,7 +49,7 @@ class UsersApi(ApiBase):
         for x in json_response['data']:
             insertUserDetailQuery = '''Insert into user(user_id, name, user_name, bio) values (%s, %s, %s, %s)''' % (
                 "'" + x['id'] + "'", "'" + x['name'] + "'", "'" + x['username'] + "'", "'" + x['description'] + "'")
-            sqliteHelperObj.execute_insert_query(insertUserDetailQuery)
+            self.__sqliteHelperObj.execute_insert_query(insertUserDetailQuery)
 
         response = {'response': 200}
         return response
@@ -59,8 +59,8 @@ class UsersApi(ApiBase):
         insertUserFollowerQuery = f'''Insert into userFollower(user_id, follower_id) values ({parsed['following_id'][0]}, {parsed['user_id'][0]})'''
         insertUserFollowingQuery = f'''Insert into userFollowing(user_id, following_id) values ({parsed['user_id'][0]}, {parsed['following_id'][0]})'''
 
-        sqliteHelperObj.execute_insert_query(insertUserFollowerQuery)
-        sqliteHelperObj.execute_insert_query(insertUserFollowingQuery)
+        self.__sqliteHelperObj.execute_insert_query(insertUserFollowerQuery)
+        self.__sqliteHelperObj.execute_insert_query(insertUserFollowingQuery)
 
         response = {'response': 200}
         return response
@@ -70,8 +70,8 @@ class UsersApi(ApiBase):
         deleteUserFollowerQuery = f'''Delete from userFollower where user_id = {parsed['following_id'][0]} AND 
         follower_id = {parsed['user_id'][0]}'''
         deleteUserFollowingQuery = f'''Delete from userFollowing where user_id = {parsed['user_id'][0]} AND following_id = {parsed['following_id'][0]}'''
-        sqliteHelperObj.execute_insert_query(deleteUserFollowerQuery)
-        sqliteHelperObj.execute_insert_query(deleteUserFollowingQuery)
+        self.__sqliteHelperObj.execute_insert_query(deleteUserFollowerQuery)
+        self.__sqliteHelperObj.execute_insert_query(deleteUserFollowingQuery)
 
         response = {'response': 200}
         return response

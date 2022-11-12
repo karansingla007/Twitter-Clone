@@ -6,13 +6,13 @@ from sqlite.sqlite_helper import SqliteHelper
 
 
 class ApiBase:
-    _sqliteHelperObj = SqliteHelper.instance()
+    __sqliteHelperObj = SqliteHelper.instance()
 
     def __init__(self):
         pass
 
     def parse_query_params(self, path):
-        self._sqliteHelperObj.use_database_query()
+        self.__sqliteHelperObj.use_database_query()
         parsed = parse_qs(urlparse(path).query)
         return parsed
 

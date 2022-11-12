@@ -1,7 +1,6 @@
 # Creator: Karan Singla
 # Date: 12 Oct 2022
 
-# Pure Abstract class ->
 from abc import abstractmethod
 
 

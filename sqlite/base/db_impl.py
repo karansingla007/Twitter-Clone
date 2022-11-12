@@ -38,7 +38,6 @@ class DbImpl(DBBase):
         self.cursor.execute(query)
         columns = [d[0] for d in self.cursor.description]
         response = [dict(zip(columns, row)) for row in self.cursor.fetchall()]
-        #print(type(response))
         response = str(response).replace("'", '"')
         return response
 
