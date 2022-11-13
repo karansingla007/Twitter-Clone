@@ -88,7 +88,6 @@ class UsersApi(ApiBase):
         response = {'response': 200}
         return response
 
-
     def handleGetUserQuery(self, path, server):
         """
         Perform get operations on user

@@ -12,8 +12,8 @@ class TestFeedApi(unittest.TestCase, TestApiBase):
         super().use_mock_database()
         output = FeedApi().handleGetFeedQuery(f'/feed/by/userName?user_name="{ADMIN_USER_NAME}"', None)
 
-        self.assertIn("tweet_id", output, 'get tweet from user api 1 testcase failed')
-        self.assertIn("description", output, 'get tweet from user api 2 testcase failed')
+        self.assertIn("tweet_id", output, 'get feed from user api 1 testcase failed')
+        self.assertIn("description", output, 'get feed from user api 2 testcase failed')
 
 
 if __name__ == '__main__':
