@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 20 Oct 2022
+  # Date: 20 Oct 2022
 
 from api_base.api_base import ApiBase
 from sqlite.sqlite_helper import SqliteHelper

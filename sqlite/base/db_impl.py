@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 12 Oct 2022
+  # Date: 12 Oct 2022
 
 import pymysql
 from sqlite.base.db_base import DBBase

@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 15 Oct 2022
+  # Date: 15 Oct 2022
 
 import json
 

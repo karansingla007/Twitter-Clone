@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 16 Oct 2022
+  # Date: 16 Oct 2022
 
 from sqlite.sqlite_helper import SqliteHelper
 
