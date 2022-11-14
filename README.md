@@ -2,9 +2,7 @@
 # Twitter Clone SQL Backend, Python
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- TABLE OF CONTENTS -->
@@ -82,15 +80,11 @@ In this, i did not use any framework to call api, just used BaseHTTPRequestHandl
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-1-orange
 [contributors-url]: https://github.com/karansingla007/SOEN6441_APP_project
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/karansingla007/SOEN6441_APP_project
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/STARS-2-yellowgreen
 [stars-url]: https://github.com/karansingla007/SOEN6441_APP_project
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/karansingla007/SOEN6441_APP_project/issues
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/LINKEDIN-karansingla007-blue
 [linkedin-url]: https://www.linkedin.com/in/karansingla007/
 [product-screenshot]: images/screenshot.png
 [Angular.io]: https://forthebadge.com/images/badges/made-with-python.svg
