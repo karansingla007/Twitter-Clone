@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 20 Oct 2022
+  # Date: 20 Oct 2022
 
 from sqlite.base.db_impl import DbImpl
 

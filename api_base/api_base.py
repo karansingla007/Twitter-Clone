@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 10 Oct 2022
+  # Date: 10 Oct 2022
 
 from urllib.parse import urlparse, parse_qs
 from sqlite.sqlite_helper import SqliteHelper

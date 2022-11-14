@@ -1,5 +1,4 @@
-# Creator: Karan Singla
-# Date: 3 Nov 2022
+  # Date: 3 Nov 2022
 
 import unittest
 
