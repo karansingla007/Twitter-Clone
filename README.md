@@ -3,7 +3,8 @@
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
+[//]: # ([![LinkedIn][linkedin-shield]][linkedin-url])
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -45,7 +46,7 @@ To setup, firstly install python in the system.
 
 ### Prerequisites
 
-In this, i did not use any framework to call api, just used BaseHTTPRequestHandler
+In this, we did not use any framework to call api, just used BaseHTTPRequestHandler
 * Macbook
   ```sh
   brew install python
@@ -88,7 +89,7 @@ In this, i did not use any framework to call api, just used BaseHTTPRequestHandl
 [linkedin-url]: https://www.linkedin.com/in/karansingla007/
 [product-screenshot]: images/screenshot.png
 [Angular.io]: https://forthebadge.com/images/badges/made-with-python.svg
-[Angular-url]: https://angular.io/
+[Angular-url]: https://www.python.org
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
