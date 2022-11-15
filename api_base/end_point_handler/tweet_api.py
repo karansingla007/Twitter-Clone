@@ -20,7 +20,9 @@ class TweetApi(ApiBase):
         """
         Post Api:- delete tweet by tweet_id
         """
+        deleteTweetQuery = f'''Delete from userLikes where tweet_id = {parsed['tweet_id'][0]}'''
         createTweetQuery = f'''Delete from userTweets where user_id = {parsed['user_id'][0]} And tweet_id = {parsed['tweet_id'][0]}'''
+        self.__sqliteHelperObj.execute_query(deleteTweetQuery)
         self.__sqliteHelperObj.execute_query(createTweetQuery)
 
         __response__ = {'response': 200, 'status': 'deleted'}

@@ -4,9 +4,6 @@ from api_base.end_point_handler.feed_api import FeedApi
 from api_base.end_point_handler.users_api import UsersApi
 from api_base.end_point_handler.tweet_api import TweetApi
 
-# HOST = "ec2-15-207-87-184.ap-south-1.compute.amazonaws.com"
-# PORT = 8080
-
 HOST = "localhost"
 PORT = 8000
 
